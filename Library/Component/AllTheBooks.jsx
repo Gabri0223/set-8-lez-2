@@ -15,7 +15,7 @@ const AllTheBooks = () => {
                 src={book.img}
               />
               <Card.Body className=" d-flex flex-column justify-content-between">
-                <Card.Title>{book.title}</Card.Title>
+                <Card.Title>{book.title} </Card.Title>
                 <Card.Text>
                   {" "}
                   Questo fantastico libro costa{" "}
