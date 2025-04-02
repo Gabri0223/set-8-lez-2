@@ -7,17 +7,24 @@ import FooterComponent from "../Component/FooterComponent.jsx";
 import AlertComponent from "../Component/AlertComponent.jsx";
 import AllTheBooks from "../Component/AllTheBooks.jsx";
 import SingleBook from "../Component/SingleBook.jsx";
+import BookList from "../Component/BookList.jsx";
+import booksData from "../books/fantasy.json";
+
+const abook = {
+  title: "The Last Wish: Introducing the Witcher",
+  img: "https://images-na.ssl-images-amazon.com/images/I/51eHtkVLL5L.jpg",
+  price: "9.5",
+};
 
 function App() {
   return (
-    <div>
+    <div className="bg-dark text-light text-center">
       <NavbarComponent />
       <AlertComponent />
-      <SingleBook
-        book={title:"The Last Wish: Introducing the Witcher",
-        img:"https://images-na.ssl-images-amazon.com/images/I/51eHtkVLL5L.jpg",
-        price:"9.5"}
-      />
+      <h1 className="mb-3">Esercizio carta singola</h1>
+      <SingleBook book={abook} />
+      <h1 className="mb-3 mt-5">Esercizio libreria</h1>
+      <BookList books={booksData} />
       {/*<AllTheBooks />*/}
       <FooterComponent />
     </div>
