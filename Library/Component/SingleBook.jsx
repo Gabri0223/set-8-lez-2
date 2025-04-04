@@ -1,6 +1,7 @@
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { Component } from "react";
+import CommentArea from "../Component/CommentArea";
 
 class BookCard extends Component {
   state = {
@@ -8,24 +9,36 @@ class BookCard extends Component {
   };
   render() {
     const { book } = this.props;
+    const id = book.asin;
+
     return (
       <div className="d-flex align-items-center flex-column mb-3">
         <Card
-          onClick={(e) => {
-            this.setState({ selected: !this.state.selected });
-          }}
           style={{
             border: this.state.selected ? "2px solid yellow" : "2px solid grey",
-            height: "600px",
+            height: this.state.selected ? "800px" : "600px",
           }}
         >
-          <Card.Img variant="top" src={book.img} style={{ height: "400px" }} />
+          <Card.Img
+            variant="top"
+            src={book.img}
+            style={{ height: "400px" }}
+            onClick={(e) => {
+              this.setState({ selected: !this.state.selected });
+            }}
+          />
           <Card.Body className="bg-dark text-light d-flex flex-column justify-content-between">
             <Card.Title>{book.title}</Card.Title>
             <Card.Text>
               Questo fantastico libro costa{" "}
               <span className="fw-bold">{book.price}$</span>
             </Card.Text>
+            {this.state.selected === true && (
+              <>
+                {console.log("Passing id to CommentArea:", book)}
+                <CommentArea id={book.asin} />
+              </>
+            )}
             <Button className="w-100" variant="light">
               Buy it
             </Button>
