@@ -4,27 +4,14 @@ import { Component } from "react";
 import CommentArea from "../Component/CommentArea";
 
 class BookCard extends Component {
-  state = {
-    selected: false,
-  };
-  componentDidUpdate = (prevProps, prevState) => {
-    console.log(prevState.selected);
-    console.log(this.state.selected);
-    if (this.state.selected !== prevState.selected) {
-      console.log(this.props.book.asin);
-      this.props.cambioValore(this.props.book.asin);
-    }
-  };
   render() {
-    const { book } = this.props;
-    const id = book.asin;
+    const { book, isSelected, onSelect } = this.props;
 
     return (
       <div className="d-flex align-items-center flex-column mb-3">
         <Card
           style={{
-            border: this.state.selected ? "2px solid yellow" : "2px solid grey",
-            height: this.state.selected ? "800px" : "600px",
+            border: isSelected ? "2px solid yellow" : "2px solid grey",
           }}
         >
           <Card.Img
@@ -32,7 +19,7 @@ class BookCard extends Component {
             src={book.img}
             style={{ height: "400px" }}
             onClick={(e) => {
-              this.setState({ selected: !this.state.selected });
+              onSelect(book.asin);
             }}
           />
           <Card.Body className="bg-dark text-light d-flex flex-column justify-content-between">
@@ -40,9 +27,6 @@ class BookCard extends Component {
             <Card.Text>
               Questo fantastico libro costa{" "}
               <span className="fw-bold">{book.price}$</span>
-              {this.state.selected === true && (
-                <>{console.log("Passing id to CommentArea:", book)}</>
-              )}
             </Card.Text>
             <Button className="w-100" variant="light">
               Buy it

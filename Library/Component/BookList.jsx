@@ -8,10 +8,19 @@ class BookList extends Component {
   state = {
     search: "",
     filtredBooks: this.props.books,
+    selectedAsin: "",
   };
+
+  handleSelection = (asin) => {
+    this.setState((prevState) => ({
+      selectedAsin: prevState.selectedAsin === asin ? null : asin,
+    }));
+    this.props.cambioValore(asin);
+  };
+
   render() {
     const { books } = this.props;
-    console.log(this.props.cambioValore);
+
     const search = (e) => {
       const { search } = this.state;
 
@@ -43,7 +52,8 @@ class BookList extends Component {
               <div className="col-6" key={book.asin}>
                 <SingleBook
                   book={book}
-                  cambioValore={this.props.cambioValore}
+                  isSelected={this.state.selectedAsin === book.asin}
+                  onSelect={this.handleSelection}
                 />
               </div>
             );

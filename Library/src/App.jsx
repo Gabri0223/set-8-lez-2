@@ -23,10 +23,12 @@ const abook = {
 
 class App extends Component {
   state = {
-    book: "",
+    book: [],
   };
   handleChange = (nuovoValore) => {
-    this.setState({ book: nuovoValore });
+    this.setState((prevState) => ({
+      book: prevState.book === nuovoValore ? [] : nuovoValore,
+    }));
   };
   render() {
     return (

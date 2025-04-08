@@ -9,8 +9,15 @@ class CommentArea extends Component {
   state = {
     comments: [],
   };
+
   GetComment = () => {
     const id = this.props.id;
+
+    if (id.length === 0) {
+      this.setState({ comments: [] });
+      return;
+    }
+
     fetch(Url + "/" + id, {
       headers: {
         Authorization:
@@ -30,16 +37,17 @@ class CommentArea extends Component {
       });
   };
 
-  componentDidUpdate = (prevProps) => {
+  componentDidUpdate(prevProps) {
     if (this.props.id !== prevProps.id) {
       this.GetComment();
     }
-  };
+  }
+
   render() {
     return (
       <div>
         <AddComment />
-        <CommentList comment={this.state.comments} />
+        <CommentList comment={this.state.comments} asin={this.props.id} />
       </div>
     );
   }
