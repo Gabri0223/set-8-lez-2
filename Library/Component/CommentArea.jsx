@@ -9,7 +9,7 @@ class CommentArea extends Component {
   state = {
     comments: [],
   };
-  componentDidMount() {
+  GetComment = () => {
     const id = this.props.id;
     fetch(Url + "/" + id, {
       headers: {
@@ -28,7 +28,13 @@ class CommentArea extends Component {
         const comments = books.map((libro) => libro.comment);
         this.setState({ comments });
       });
-  }
+  };
+
+  componentDidUpdate = (prevProps) => {
+    if (this.props.id !== prevProps.id) {
+      this.GetComment();
+    }
+  };
   render() {
     return (
       <div>

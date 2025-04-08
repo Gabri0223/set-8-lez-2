@@ -7,6 +7,14 @@ class BookCard extends Component {
   state = {
     selected: false,
   };
+  componentDidUpdate = (prevProps, prevState) => {
+    console.log(prevState.selected);
+    console.log(this.state.selected);
+    if (this.state.selected !== prevState.selected) {
+      console.log(this.props.book.asin);
+      this.props.cambioValore(this.props.book.asin);
+    }
+  };
   render() {
     const { book } = this.props;
     const id = book.asin;
@@ -32,13 +40,10 @@ class BookCard extends Component {
             <Card.Text>
               Questo fantastico libro costa{" "}
               <span className="fw-bold">{book.price}$</span>
+              {this.state.selected === true && (
+                <>{console.log("Passing id to CommentArea:", book)}</>
+              )}
             </Card.Text>
-            {this.state.selected === true && (
-              <>
-                {console.log("Passing id to CommentArea:", book)}
-                <CommentArea id={book.asin} />
-              </>
-            )}
             <Button className="w-100" variant="light">
               Buy it
             </Button>

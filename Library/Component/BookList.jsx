@@ -2,6 +2,7 @@ import SingleBook from "./SingleBook";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { Component } from "react";
+import CommentArea from "./CommentArea";
 
 class BookList extends Component {
   state = {
@@ -10,16 +11,14 @@ class BookList extends Component {
   };
   render() {
     const { books } = this.props;
-
+    console.log(this.props.cambioValore);
     const search = (e) => {
       const { search } = this.state;
 
       e.preventDefault();
-      //const filterBooks = books.filter((book) => {
-      //book.title.toLowerCase().includes(this.state.search.toLowerCase());
-      //});
-      const filterBooks = books.filter(
-        (book) => book.title.toLowerCase().includes(search.toLowerCase()) // Restituisce true o false per ogni libro
+
+      const filterBooks = books.filter((book) =>
+        book.title.toLowerCase().includes(search.toLowerCase())
       );
 
       this.setState({ filtredBooks: filterBooks });
@@ -27,7 +26,7 @@ class BookList extends Component {
     return (
       <div className="container-fluid">
         <div className=" d-flex justify-content-center">
-          <Form className="mb-5 w-50 d-flex justify-content-center">
+          <Form className="mb-5 w-100 d-flex justify-content-center">
             <Form.Control
               className="w-50"
               value={this.state.search}
@@ -41,8 +40,11 @@ class BookList extends Component {
         <div className="row">
           {this.state.filtredBooks.map((book) => {
             return (
-              <div className="col-3" key={book.asin}>
-                <SingleBook book={book} />
+              <div className="col-6" key={book.asin}>
+                <SingleBook
+                  book={book}
+                  cambioValore={this.props.cambioValore}
+                />
               </div>
             );
           })}

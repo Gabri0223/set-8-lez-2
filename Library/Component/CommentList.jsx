@@ -1,20 +1,18 @@
-import Carousel from "react-bootstrap/Carousel";
+import ListGroup from "react-bootstrap/ListGroup";
 
 const CommentList = ({ comment }) => {
   console.log(comment);
   return (
-    <Carousel className="mt-5">
+    <ListGroup>
       {comment.map((commento) => {
         console.log(commento);
         return (
-          <Carousel.Item style={{ height: "125px" }}>
-            <Carousel.Caption>
-              <p>{commento}</p>
-            </Carousel.Caption>{" "}
-          </Carousel.Item>
+          <div>
+            <ListGroup.Item>{commento}</ListGroup.Item>
+          </div>
         );
       })}
-    </Carousel>
+    </ListGroup>
   );
 };
 
