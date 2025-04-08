@@ -1,20 +1,15 @@
 import { useEffect, useState } from "react";
 import AddComment from "../Component/AddComment";
 import CommentList from "../Component/CommentList";
-import { Component } from "react";
 
 const Url = "https://striveschool-api.herokuapp.com/api/comments/";
 
-class CommentArea extends Component {
-  state = {
-    comments: [],
-  };
+const CommentArea = function ({ id }) {
+  const [comments, setComments] = useState([]);
 
-  GetComment = () => {
-    const id = this.props.id;
-
+  const GetComment = () => {
     if (id.length === 0) {
-      this.setState({ comments: [] });
+      setComments([]);
       return;
     }
 
@@ -33,24 +28,20 @@ class CommentArea extends Component {
       })
       .then((books) => {
         const comments = books.map((libro) => libro.comment);
-        this.setState({ comments });
+        setComments(comments);
       });
   };
 
-  componentDidUpdate(prevProps) {
-    if (this.props.id !== prevProps.id) {
-      this.GetComment();
-    }
-  }
+  useEffect(() => {
+    GetComment();
+  }, [id]);
 
-  render() {
-    return (
-      <div>
-        <AddComment />
-        <CommentList comment={this.state.comments} asin={this.props.id} />
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <AddComment />
+      <CommentList comment={comments} asin={id} />
+    </div>
+  );
+};
 
 export default CommentArea;

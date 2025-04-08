@@ -1,42 +1,37 @@
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import { Component } from "react";
-import CommentArea from "../Component/CommentArea";
 
-class BookCard extends Component {
-  render() {
-    const { book, isSelected, onSelect } = this.props;
-
-    return (
-      <div className="d-flex align-items-center flex-column mb-3">
-        <Card
-          style={{
-            border: isSelected ? "2px solid yellow" : "2px solid grey",
+const BookCard = function ({ book, isSelected, onSelect }) {
+  return (
+    <div className="d-flex align-items-center flex-column mb-3">
+      <Card
+        style={{
+          border: isSelected ? "2px solid yellow" : "2px solid grey",
+        }}
+      >
+        <Card.Img
+          variant="top"
+          src={book.img}
+          style={{ height: "400px" }}
+          onClick={(e) => {
+            onSelect(book.asin);
           }}
-        >
-          <Card.Img
-            variant="top"
-            src={book.img}
-            style={{ height: "400px" }}
-            onClick={(e) => {
-              onSelect(book.asin);
-            }}
-          />
-          <Card.Body className="bg-dark text-light d-flex flex-column justify-content-between">
-            <Card.Title>{book.title}</Card.Title>
-            <Card.Text>
-              Questo fantastico libro costa{" "}
-              <span className="fw-bold">{book.price}$</span>
-            </Card.Text>
-            <Button className="w-100" variant="light">
-              Buy it
-            </Button>
-          </Card.Body>
-        </Card>
-      </div>
-    );
-  }
-}
+        />
+        <Card.Body className="bg-dark text-light d-flex flex-column justify-content-between">
+          <Card.Title>{book.title}</Card.Title>
+          <Card.Text>
+            Questo fantastico libro costa{" "}
+            <span className="fw-bold">{book.price}$</span>
+          </Card.Text>
+          <Button className="w-100" variant="light">
+            Buy it
+          </Button>
+        </Card.Body>
+      </Card>
+    </div>
+  );
+};
+
 export default BookCard;
 
 //function BasicExample({ book }) {

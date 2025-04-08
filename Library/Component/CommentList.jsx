@@ -1,20 +1,18 @@
 import ListGroup from "react-bootstrap/ListGroup";
-import { Component } from "react";
+import { useEffect, useState } from "react";
 
-class CommentList extends Component {
-  render() {
-    return (
-      <ListGroup>
-        {this.props.comment.map((commento) => {
-          return (
-            <div>
-              <ListGroup.Item>{commento}</ListGroup.Item>
-            </div>
-          );
-        })}
-      </ListGroup>
-    );
-  }
-}
+const CommentList = function ({ comment, asin }) {
+  return (
+    <ListGroup>
+      {comment.map((commento) => {
+        return (
+          <div>
+            <ListGroup.Item>{commento}</ListGroup.Item>
+          </div>
+        );
+      })}
+    </ListGroup>
+  );
+};
 
 export default CommentList;

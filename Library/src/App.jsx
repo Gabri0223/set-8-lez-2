@@ -1,6 +1,4 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavbarComponent from "../Component/NavbarComponent.jsx";
 import FooterComponent from "../Component/FooterComponent.jsx";
@@ -13,7 +11,6 @@ import CommentArea from "../Component/CommentArea.jsx";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { Component } from "react";
 
 const abook = {
   title: "The Last Wish: Introducing the Witcher",
@@ -21,39 +18,35 @@ const abook = {
   price: "9.5",
 };
 
-class App extends Component {
-  state = {
-    book: [],
-  };
-  handleChange = (nuovoValore) => {
-    this.setState((prevState) => ({
-      book: prevState.book === nuovoValore ? [] : nuovoValore,
-    }));
-  };
-  render() {
-    return (
-      <div className="bg-dark text-light text-center">
-        <NavbarComponent />
-        <AlertComponent />
-        <h1 className="mb-3">Esercizio carta singola</h1>
-        <SingleBook book={abook} />
-        <h1 className="mb-3 mt-5">Esercizio libreria</h1>
-        <Container>
-          <Row>
-            <Col>
-              <BookList books={booksData} cambioValore={this.handleChange} />
-            </Col>
-            <Col>
-              <CommentArea id={this.state.book} />
-            </Col>
-          </Row>
-        </Container>
+const App = function () {
+  const [book, setBook] = useState([]);
 
-        {/*<AllTheBooks />*/}
-        <FooterComponent />
-      </div>
-    );
-  }
-}
+  const handleChange = (nuovoValore) => {
+    setBook((prevState) => (prevState === nuovoValore ? [] : nuovoValore));
+  };
+
+  return (
+    <div className="bg-dark text-light text-center">
+      <NavbarComponent />
+      <AlertComponent />
+      <h1 className="mb-3">Esercizio carta singola</h1>
+      <SingleBook book={abook} />
+      <h1 className="mb-3 mt-5">Esercizio libreria</h1>
+      <Container>
+        <Row>
+          <Col>
+            <BookList books={booksData} cambioValore={handleChange} />
+          </Col>
+          <Col>
+            <CommentArea id={book} />
+          </Col>
+        </Row>
+      </Container>
+
+      {/*<AllTheBooks />*/}
+      <FooterComponent />
+    </div>
+  );
+};
 
 export default App;
