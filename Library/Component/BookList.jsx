@@ -39,7 +39,7 @@ const BookList = ({ books, cambioValore }) => {
       <div className="row">
         {filtredBooks.map((book) => {
           return (
-            <div className="col-6" key={book.asin}>
+            <div className="col-6" key={book.asin} data-testid="Card">
               <SingleBook
                 book={book}
                 isSelected={selectedAsin === book.asin}
